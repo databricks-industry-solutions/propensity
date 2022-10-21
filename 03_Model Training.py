@@ -1,4 +1,9 @@
 # Databricks notebook source
+# MAGIC %md 
+# MAGIC You may find this series of notebooks at https://github.com/databricks-industry-solutions/propensity. For more information about this solution accelerator, visit https://www.databricks.com/solutions/accelerators/propensity-scoring.
+
+# COMMAND ----------
+
 # MAGIC %md The purpose of this notebook is to train a propensity scoring model. 
 
 # COMMAND ----------
