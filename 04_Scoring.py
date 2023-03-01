@@ -210,7 +210,7 @@ display(
 # MAGIC 
 # MAGIC The final workflow is more of a manual workflow by which the Data Scientists in your organization periodically train and retrain various propensity scoring models.  Evaluation and review of these models often take place before these are elevated into production, and from that point, the scoring workflow picks up the trained model to generate its next set of scores.
 # MAGIC 
-# MAGIC In our demo, the scores that are generated are captured in a SQL table for persistance and review.  In most real-world implementations, these data would be published to one or more downstream systems supporting marketing activities (such as a CRM, CDP or MDP).  Databricks supports a variety of means for making data avaiable to such systems so please consult the documentation for the specific systems your organization uses to see which mechanisms are best suited for data integration. 
+# MAGIC In our demo, the scores that are generated are captured in a SQL table for persistance and review.  In most real-world implementations, these data would be published to one or more downstream systems supporting marketing activities (such as a CRM, CDP or MDP).  Databricks supports a variety of means for making data available to such systems so please consult the documentation for the specific systems your organization uses to see which mechanisms are best suited for data integration. 
 
 # COMMAND ----------
 

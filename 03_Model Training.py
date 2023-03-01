@@ -10,7 +10,7 @@
 
 # MAGIC %md ## Introduction
 # MAGIC 
-# MAGIC In this notebook, we'll calculate the labels associated with a set of features in order to train a model capable of calculating household propensity for a given product commodity (category). We will make use of [Databricks AutoML](https://docs.databricks.com/applications/machine-learning/automl.html) to train this model as this is help to automate much of the work associated with this and automatically employ industry best-practices for this kind of modeling effort.  Once we have a model trained, we will persiste it for scoring in the next notebook.
+# MAGIC In this notebook, we'll calculate the labels associated with a set of features in order to train a model capable of calculating household propensity for a given product commodity (category). We will make use of [Databricks AutoML](https://docs.databricks.com/applications/machine-learning/automl.html) to train this model as this is help to automate much of the work associated with this and automatically employ industry best-practices for this kind of modeling effort.  Once we have a model trained, we will persist it for scoring in the next notebook.
 
 # COMMAND ----------
 
@@ -40,7 +40,7 @@ spark.catalog.setCurrentDatabase(config['database'])
 # MAGIC 
 # MAGIC To do that, we will first need to assemble a dataset of all commodities intersected with all households. We'll then need to retrieve the transactional data associated with the period for which we wish to predict and identify which of those household-commodity combinations shows up in that data to then assign our label values:
 # MAGIC 
-# MAGIC **NOTE** Please notice that to select the transactions that should be used to derive our labels, we identify the last point in the transaction history from which features associated with these labels should be derived. In otherwords, if our labels are derived from a 30-day period, our features should be derived from day one-day or more prior to the start of that 30-day period.  That last day associated with our features was recorded in the feature set as the *day* field.  That *day* value will be included in our label set to facilitate a join to our feature set in later steps.
+# MAGIC **NOTE** Please notice that to select the transactions that should be used to derive our labels, we identify the last point in the transaction history from which features associated with these labels should be derived. In other words, if our labels are derived from a 30-day period, our features should be derived from day one-day or more prior to the start of that 30-day period.  That last day associated with our features was recorded in the feature set as the *day* field.  That *day* value will be included in our label set to facilitate a join to our feature set in later steps.
 
 # COMMAND ----------
 
@@ -95,7 +95,7 @@ label_transactions = transactions.filter(f.expr(f"day  > '{features_day.strftime
 # COMMAND ----------
 
 # DBTITLE 1,Generate Labels
-# calculate label of 1 if commodity found in curent transaction set for a given household
+# calculate label of 1 if commodity found in current transaction set for a given household
 purchased_commodities = (
   label_transactions
     .select(
@@ -217,9 +217,9 @@ display(training_df)
 
 # MAGIC %md ## Step 3: Perform AutoML Model Training
 # MAGIC 
-# MAGIC With our training set in hand, we can now train our model.  AutoML makes the steps for this pretty simple, but there is one *gotcha*.  As part of AutoML's preprocessing steps, it inspects our data and attempts to discern between categorical and continous features. To avoid confusion, we will apply explicit control over this step by applying a [semantic type annocation](https://docs.databricks.com/applications/machine-learning/automl.html#semantic-type-annotations) to each of our fields.  
+# MAGIC With our training set in hand, we can now train our model.  AutoML makes the steps for this pretty simple, but there is one *gotcha*.  As part of AutoML's preprocessing steps, it inspects our data and attempts to discern between categorical and continuous features. To avoid confusion, we will apply explicit control over this step by applying a [semantic type annotation](https://docs.databricks.com/applications/machine-learning/automl.html#semantic-type-annotations) to each of our fields.  
 # MAGIC 
-# MAGIC While these annotations support *categorical*, *text*, *date* and *numeric* (continous) designations, all our feature fields are *numeric*:
+# MAGIC While these annotations support *categorical*, *text*, *date* and *numeric* (continuous) designations, all our feature fields are *numeric*:
 
 # COMMAND ----------
 

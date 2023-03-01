@@ -18,7 +18,7 @@
 # MAGIC 
 # MAGIC <img src='https://brysmiwasb.blob.core.windows.net/demos/images/propensity_workflow3.png' width='700'>
 # MAGIC 
-# MAGIC Across these notebooks, we will strive to produce propensity scores that provide us the likliehood a customer (household) will purchase products within a category in the next 30 days based on features generated from customer interactions taking place in various periods from over the last couple years.  In real-world implementations, the forward looking period may be shorter or longer depending on the specific needs driving the scoring and feature generation may be more or less exhaustive than what is shown here. Still, organizations seeking to build a robust propensity scoring pipeline should find value in the concepts explored in each stage of the demonstrated process.
+# MAGIC Across these notebooks, we will strive to produce propensity scores that provide us the likelihood a customer (household) will purchase products within a category in the next 30 days based on features generated from customer interactions taking place in various periods from over the last couple years.  In real-world implementations, the forward looking period may be shorter or longer depending on the specific needs driving the scoring and feature generation may be more or less exhaustive than what is shown here. Still, organizations seeking to build a robust propensity scoring pipeline should find value in the concepts explored in each stage of the demonstrated process.
 
 # COMMAND ----------
 
