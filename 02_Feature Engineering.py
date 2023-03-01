@@ -12,7 +12,7 @@
 # MAGIC 
 # MAGIC In this notebook we will leverage transactional data associated with individual households to generate features with which we will train our model and, later, perform inference, *i.e.* make predictions.  Our goal is to predict the likelihood a household will purchase products from a given product category, *i.e.* commodity-designation, in the next 30 days. 
 # MAGIC 
-# MAGIC In an operationalized workflow, we would receive new data into the lakehouse on a periodic, *i.e.* daily or more frequent basis.  As that data arrives, we might recalculate features for propensity scoring and store these for the purpose of makind predictions, *i.e.* performing inference, about the future period. As these features age, they at some point become useful for training new models.  This happens at the point that enough new data arrives that we can derive labels for the period they were built to predict.
+# MAGIC In an operationalized workflow, we would receive new data into the lakehouse on a periodic, *i.e.* daily or more frequent basis.  As that data arrives, we might recalculate features for propensity scoring and store these for the purpose of making predictions, *i.e.* performing inference, about the future period. As these features age, they at some point become useful for training new models.  This happens at the point that enough new data arrives that we can derive labels for the period they were built to predict.
 # MAGIC 
 # MAGIC To simulate this workflow, we will calculate features for each of the last 30-days of our dataset. We will establish our workflow logic at the top of this notebook and then define a loop at the bottom to persist these data for later use.  As part of this, we will be persisting our data to the [Databricks Feature Store](https://docs.databricks.com/applications/machine-learning/feature-store/index.html#), a capability in the Databricks platform which simplifies the persistence and retrieval of features. 
 # MAGIC 
@@ -71,7 +71,7 @@ def get_features(df, include_commodity=False, window=None):
     '60d': derive metrics from the last 60 days of the dataset
     '90d': derive metrics from the last 90 days of the dataset
     '1yr': derive metrics from the 30 day period starting 1-year
-           prior to the end of the dataset. this alings with the
+           prior to the end of the dataset. this aligns with the
            period from which our labels are derived.
   '''
   
@@ -455,7 +455,7 @@ for d in range(31):
 
 # COMMAND ----------
 
-# MAGIC %md Our features have been written to a feature store table named *propensity_features* within the *propensity* database (whichwe have set as our current database).  We can access this table as a standard SQL table to verify its contents as follows:
+# MAGIC %md Our features have been written to a feature store table named *propensity_features* within the *propensity* database (which we have set as our current database).  We can access this table as a standard SQL table to verify its contents as follows:
 
 # COMMAND ----------
 
