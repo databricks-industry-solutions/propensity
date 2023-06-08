@@ -8,7 +8,7 @@
 # COMMAND ----------
 
 # MAGIC %md 
-# MAGIC Set Kaggle credential configuration values in the block below: You can set up a [secret scope](https://docs.databricks.com/security/secrets/secret-scopes.html) to manage credentials used in notebooks. For the block below, we have manually set up the `solution-accelerator-cicd` secret scope and saved our credentials there for internal testing purposes.
+# MAGIC Set Kaggle credential configuration values in the block below: You can set up a [secret scope](https://docs.databricks.com/security/secrets/secret-scopes.html) to manage credentials used in notebooks. See the `./RUNME` notebook for guidance on how to set up a secret scope. 
 
 # COMMAND ----------
 
@@ -34,18 +34,26 @@ os.environ['kaggle_key'] = dbutils.secrets.get("solution-accelerator-cicd", "kag
 
 # COMMAND ----------
 
+# MAGIC %md Set config for the path to move data into. Also initialize the database we will use for the accelerator.
+
+# COMMAND ----------
+
+# MAGIC %run ./config
+
+# COMMAND ----------
+
 # MAGIC %md Move the downloaded data to the folder used throughout the accelerator:
 
 # COMMAND ----------
 
-dbutils.fs.mv("file:/databricks/driver/campaign_desc.csv", "dbfs:/tmp/propensity/bronze/campaign_desc.csv")
-dbutils.fs.mv("file:/databricks/driver/campaign_table.csv", "dbfs:/tmp/propensity/bronze/campaign_table.csv")
-dbutils.fs.mv("file:/databricks/driver/causal_data.csv", "dbfs:/tmp/propensity/bronze/causal_data.csv")
-dbutils.fs.mv("file:/databricks/driver/coupon.csv", "dbfs:/tmp/propensity/bronze/coupon.csv")
-dbutils.fs.mv("file:/databricks/driver/coupon_redempt.csv", "dbfs:/tmp/propensity/bronze/coupon_redempt.csv")
-dbutils.fs.mv("file:/databricks/driver/hh_demographic.csv", "dbfs:/tmp/propensity/bronze/hh_demographic.csv")
-dbutils.fs.mv("file:/databricks/driver/product.csv", "dbfs:/tmp/propensity/bronze/product.csv")
-dbutils.fs.mv("file:/databricks/driver/transaction_data.csv", "dbfs:/tmp/propensity/bronze/transaction_data.csv")
+dbutils.fs.mv("file:/databricks/driver/campaign_desc.csv", f"dbfs:{config['mount_point']}/bronze/campaign_desc.csv")
+dbutils.fs.mv("file:/databricks/driver/campaign_table.csv", f"dbfs:{config['mount_point']}/bronze/campaign_table.csv")
+dbutils.fs.mv("file:/databricks/driver/causal_data.csv", f"dbfs:{config['mount_point']}/bronze/causal_data.csv")
+dbutils.fs.mv("file:/databricks/driver/coupon.csv", f"dbfs:{config['mount_point']}/bronze/coupon.csv")
+dbutils.fs.mv("file:/databricks/driver/coupon_redempt.csv", f"dbfs:{config['mount_point']}/bronze/coupon_redempt.csv")
+dbutils.fs.mv("file:/databricks/driver/hh_demographic.csv", f"dbfs:{config['mount_point']}/bronze/hh_demographic.csv")
+dbutils.fs.mv("file:/databricks/driver/product.csv", f"dbfs:{config['mount_point']}/bronze/product.csv")
+dbutils.fs.mv("file:/databricks/driver/transaction_data.csv", f"dbfs:{config['mount_point']}/bronze/transaction_data.csv")
 
 # COMMAND ----------
 
